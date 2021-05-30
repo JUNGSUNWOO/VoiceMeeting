@@ -19,7 +19,7 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 
-public class MainActivity extends AppCompatActivity {
+public class gps_location extends AppCompatActivity {
     private static final int REQUEST_CODE_LOCATION_PERMISSION = 1;
     private TextView tv_latlng;
     private ProgressBar progressBar;
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_gps);
         tv_latlng = findViewById(R.id.tv_latlng);
         progressBar = findViewById(R.id.progressbar);
         findViewById(R.id.get_location).setOnClickListener(new View.OnClickListener() {
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                         getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION
                 ) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(
-                            MainActivity.this,
+                            gps_location.this,
                             new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                             REQUEST_CODE_LOCATION_PERMISSION
                     );
@@ -75,13 +75,13 @@ public class MainActivity extends AppCompatActivity {
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        LocationServices.getFusedLocationProviderClient(MainActivity.this)
+        LocationServices.getFusedLocationProviderClient(gps_location.this)
                 .requestLocationUpdates(locationRequest, new LocationCallback() {
 
                     @Override
                     public void onLocationResult(@NonNull LocationResult locationResult) {
                         super.onLocationResult(locationResult);
-                        LocationServices.getFusedLocationProviderClient(MainActivity.this)
+                        LocationServices.getFusedLocationProviderClient(gps_location.this)
                                 .removeLocationUpdates(this);
                         if (locationResult != null && locationResult.getLocations().size() > 0) {
                             int latestLocationIndex = locationResult.getLocations().size() - 1;
