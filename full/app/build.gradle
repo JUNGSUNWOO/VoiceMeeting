@@ -47,7 +47,10 @@ dependencies {
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    implementation 'com.github.nkzawa:socket.io-client:0.3.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:26.0.0'
 
     /* Remote monster WebRTC library */
     api 'com.remotemonster:sdk:2.6.8'
@@ -58,5 +61,7 @@ dependencies {
     /**
      *  MultiDex Libarary
      */
-    implementation 'androidx.multidex:multidex:2.0.1'
+//    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'com.android.support:multidex:1.0.3'
+
 }

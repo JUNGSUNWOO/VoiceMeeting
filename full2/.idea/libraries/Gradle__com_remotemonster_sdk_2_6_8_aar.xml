@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: com.remotemonster:sdk:2.6.8@aar">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4ce5e51c0dc3ee1773a23482a042ed11/sdk-2.6.8/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4ce5e51c0dc3ee1773a23482a042ed11/sdk-2.6.8/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4ce5e51c0dc3ee1773a23482a042ed11/sdk-2.6.8/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4ce5e51c0dc3ee1773a23482a042ed11/sdk-2.6.8/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.remotemonster/sdk/2.6.8/1a9f5fbc0b6d871cac534263373386aafb630dc2/sdk-2.6.8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

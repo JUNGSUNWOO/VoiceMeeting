@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+//import android.support.v7.app.AppCompatActivity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,7 +31,6 @@ import java.util.ArrayList;
 public class ListActivity extends AppCompatActivity {
     private RoomAdapter mAdapter;
     private RemonCall remonCall;
-    private RemonCast remonCast;
     private int remonType = 0;
     private RemonApplication remonApplication;
 
@@ -56,18 +56,11 @@ public class ListActivity extends AppCompatActivity {
                 Intent intentCreate = new Intent(ListActivity.this, CallActivity.class);
                 intentCreate.putExtra("isCreate", true);
                 startActivity(intentCreate);
-            } else if (remonType == 1) {
-                remonCast.close();
-                Intent intentCreate = new Intent(ListActivity.this, CastActivity.class);
-                intentCreate.putExtra("isCreate", true);
-                startActivity(intentCreate);
             }
         });
     }
 
     private void getChannelList() {
-
-
         mRoomList.clear();
         if (remonType == 0 || remonType == 3) {
             /* type = 0 통신일 경우 */
@@ -80,23 +73,6 @@ public class ListActivity extends AppCompatActivity {
                     .build();
             remonCall.onInit(() -> remonCall.fetchCalls());
             remonCall.onFetch(rooms -> {
-                mRoomList.clear();
-                for (Room room : rooms) {
-                    mRoomList.add(room);
-                }
-                runOnUiThread(() -> mAdapter.notifyDataSetChanged());
-            });
-        } else {
-            /* type = 1 방송일 경우 */
-            remonCast = RemonCast.builder()
-                    .context(ListActivity.this)
-                    .serviceId(remonApplication.getConfig().getServiceId())
-                    .key(remonApplication.getConfig().getKey())
-                    .restUrl(remonApplication.getConfig().restHost)
-                    .wssUrl(remonApplication.getConfig().socketUrl)
-                    .build();
-            remonCast.onInit(() -> remonCast.fetchCasts());
-            remonCast.onFetch(rooms -> {
                 mRoomList.clear();
                 for (Room room : rooms) {
                     mRoomList.add(room);
@@ -166,12 +142,6 @@ public class ListActivity extends AppCompatActivity {
                     intent.putExtra("isCreate", false);
                     intent.putExtra("chid", mRoomList.get(position).getId());
                     startActivity(intent);
-                } else if (remonType == 1) {
-                    remonCast.close();
-                    Intent intent = new Intent(ListActivity.this, CastActivity.class);
-                    intent.putExtra("isCreate", false);
-                    intent.putExtra("chid", mRoomList.get(position).getId());
-                    startActivity(intent);
                 }
             });
             binding.imvSetConfig.setOnClickListener(v -> {
@@ -183,21 +153,12 @@ public class ListActivity extends AppCompatActivity {
                         intent.putExtra("setConfig", true);
                         intent.putExtra("chid", mRoomList.get(position).getId());
                         startActivity(intent);
-                    } else if (remonType == 1) {
-                        remonCast.close();
-                        Intent intent = new Intent(ListActivity.this, CastActivity.class);
-                        intent.putExtra("isCreate", false);
-                        intent.putExtra("setConfig", true);
-                        intent.putExtra("chid", mRoomList.get(position).getId());
-                        startActivity(intent);
                     }
                 }
             });
             return binding.getRoot();
         }
-
     }
-
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);

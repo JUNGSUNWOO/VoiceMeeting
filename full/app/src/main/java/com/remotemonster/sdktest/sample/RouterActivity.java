@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+//import android.support.v7.app.AppCompatActivity;
 
 import com.remon.sdktest.R;
 import com.remon.sdktest.databinding.ActivityRouterBinding;
@@ -39,12 +40,6 @@ public class RouterActivity extends AppCompatActivity {
         mBinding.btnRemonCall.setOnClickListener(v -> {
             Intent intent = new Intent(RouterActivity.this, ListActivity.class);
             intent.putExtra("remonType", 0);
-            startActivity(intent);
-        });
-
-        mBinding.btnRemonCast.setOnClickListener(v -> {
-            Intent intent = new Intent(RouterActivity.this, ListActivity.class);
-            intent.putExtra("remonType", 1);
             startActivity(intent);
         });
     }

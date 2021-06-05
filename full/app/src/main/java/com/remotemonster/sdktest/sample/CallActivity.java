@@ -2,6 +2,7 @@ package com.remotemonster.sdktest.sample;
 
 import android.content.Intent;
 import android.os.Bundle;
+//import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -42,8 +43,7 @@ public class CallActivity extends AppCompatActivity {
                 remonCall = new RemonCall();
                 Config config;
                 config = remonApplication.getConfig();
-                config.setLocalView(mBinding.surfRendererLocal);
-                config.setRemoteView(mBinding.surfRendererRemote);
+
                 config.setActivity(CallActivity.this);
                 setCallback();
                 connectChId = chid;
@@ -56,8 +56,6 @@ public class CallActivity extends AppCompatActivity {
                 ConfigDialog configDialog = new ConfigDialog(CallActivity.this, false, chid -> {
                     Config config;
                     config = remonApplication.getConfig();
-                    config.setLocalView(mBinding.surfRendererLocal);
-                    config.setRemoteView(mBinding.surfRendererRemote);
                     config.setRestHost(remonApplication.getConfig().restHost);
                     config.setSocketUrl(remonApplication.getConfig().socketUrl);
                     config.setActivity(CallActivity.this);
@@ -70,8 +68,6 @@ public class CallActivity extends AppCompatActivity {
             } else {
                 remonCall = RemonCall.builder()
                         .context(CallActivity.this)
-                        .localView(mBinding.surfRendererLocal)
-                        .remoteView(mBinding.surfRendererRemote)
                         .serviceId(remonApplication.getConfig().getServiceId())
                         .key(remonApplication.getConfig().getKey())
                         .restUrl(remonApplication.getConfig().restHost)
@@ -101,7 +97,6 @@ public class CallActivity extends AppCompatActivity {
             remonCall.close();
         });
 
-        mBinding.btnStatReport.setOnClickListener(v -> remonCall.enableStatView(true, mBinding.rlRemoteView));
     }
 
     private void setCallback() {
@@ -112,8 +107,6 @@ public class CallActivity extends AppCompatActivity {
         });
         remonCall.onConnect((String id) -> addLog("onConnect : " + id));
         remonCall.onComplete(() ->  {
-            mBinding.surfRendererLocal.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FILL);
-            mBinding.surfRendererRemote.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FILL);
         });
         remonCall.onClose((closeType) -> addLog("onClose : "+ closeType.toString()));
         remonCall.onError(e -> addLog("error code : " + e.getErrorCode() + " / " + e.getDescription()));

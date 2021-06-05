@@ -25,19 +25,10 @@ import com.remotemonster.sdk.data.AudioType;
  */
 
 public class ConfigDialog extends Dialog {
-    LinearLayout llVideoWidth;
-    LinearLayout llVideoHeight;
-    LinearLayout llVideoFps;
-    LinearLayout llfirstVideoBitrate;
+
     Button btnOk;
     EditText etChannelName;
     LinearLayout llChannelName;
-    Spinner spVideoCodec;
-    TextView tvVideoWidth;
-    TextView tvVideoHeight;
-    TextView tvVideoFps;
-    TextView tvFirstVideoBitrate;
-    CheckBox cbEnableVideoCall;
     Spinner spAudioType;
     Spinner spAudioCodec;
 
@@ -52,19 +43,10 @@ public class ConfigDialog extends Dialog {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_set_config);
 
-        llVideoWidth = (LinearLayout) findViewById(R.id.llVideoWidth);
-        llVideoHeight = (LinearLayout) findViewById(R.id.llVideoHeight);
-        llVideoFps = (LinearLayout) findViewById(R.id.llVideoFps);
-        llfirstVideoBitrate = (LinearLayout) findViewById(R.id.llfirstVideoBitrate);
+
         btnOk = (Button) findViewById(R.id.btnOk);
         etChannelName = (EditText) findViewById(R.id.etChannelName);
         llChannelName = (LinearLayout) findViewById(R.id.llChannelName);
-        spVideoCodec = (Spinner) findViewById(R.id.spVideoCodec);
-        tvVideoWidth = (TextView) findViewById(R.id.tvVideoWidth);
-        tvVideoHeight = (TextView) findViewById(R.id.tvVideoHeight);
-        tvVideoFps = (TextView) findViewById(R.id.tvVideoFps);
-        tvFirstVideoBitrate = (TextView) findViewById(R.id.tvFirstVideoBitrate);
-        cbEnableVideoCall = (CheckBox) findViewById(R.id.cbEnableVideoCall);
         spAudioType = (Spinner) findViewById(R.id.spAudioType);
         spAudioCodec = (Spinner) findViewById(R.id.spAudioCodec);
 
@@ -92,31 +74,6 @@ public class ConfigDialog extends Dialog {
         });
 
 
-        spVideoCodec.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case 0:
-                        remonApplication.getConfig().setVideoCodec("VP8");
-                        break;
-
-                    case 1:
-                        remonApplication.getConfig().setVideoCodec("VP9");
-                        break;
-
-                    case 2:
-                        remonApplication.getConfig().setVideoCodec("H264");
-                        break;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        spVideoCodec.setSelection(2);
-
         spAudioCodec.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -138,53 +95,7 @@ public class ConfigDialog extends Dialog {
         });
         spAudioCodec.setSelection(0);
 
-        llVideoWidth.setOnClickListener(v -> {
-            NumSetDialog numSetDialog = new NumSetDialog(activity, "Video Width?", num -> {
-                remonApplication.getConfig().setVideoWidth(num);
-                tvVideoWidth.setText(num + "");
-                closeSoftKey();
-            });
-            numSetDialog.show();
-        });
-
-        llVideoHeight.setOnClickListener(v -> {
-            NumSetDialog numSetDialog = new NumSetDialog(activity, "Video Height?", num -> {
-                remonApplication.getConfig().setVideoHeight(num);
-                tvVideoHeight.setText(num + "");
-                closeSoftKey();
-            });
-            numSetDialog.show();
-        });
-
-
-        llVideoFps.setOnClickListener(v -> {
-            NumSetDialog numSetDialog = new NumSetDialog(activity, "Video Fps?", num -> {
-                remonApplication.getConfig().setVideoFps(num);
-                tvVideoFps.setText(num + "");
-                closeSoftKey();
-            });
-            numSetDialog.show();
-
-        });
-
-        llfirstVideoBitrate.setOnClickListener(v -> {
-            NumSetDialog numSetDialog = new NumSetDialog(activity, "First Video Bitrate?", num -> {
-                remonApplication.getConfig().setStartVideoBitrate(num);
-                tvFirstVideoBitrate.setText(num + "");
-                closeSoftKey();
-            });
-            numSetDialog.show();
-        });
-
-        cbEnableVideoCall.setOnClickListener(v -> {
-            if (cbEnableVideoCall.isChecked()) {
-                remonApplication.getConfig().setVideoCall(true);
-            } else {
-                remonApplication.getConfig().setVideoCall(false);
-            }
-        });
-
-        spAudioType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+      spAudioType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 switch (position) {
